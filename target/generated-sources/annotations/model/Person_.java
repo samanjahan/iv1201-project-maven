@@ -8,7 +8,7 @@ import model.Availability;
 import model.CompetenceProfile;
 import model.Role;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-06T12:05:58")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-01-29T22:00:39")
 @StaticMetamodel(Person.class)
 public class Person_ { 
 

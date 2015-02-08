@@ -7,9 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -48,14 +44,9 @@ public class CompetenceProfile implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "years_of_experience")
     private Double yearsOfExperience;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compId")
-    private Collection<Translate> translateCollection;
     @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne
     private Person username;
-    @JoinColumn(name = "comp_id", referencedColumnName = "competence_id")
-    @ManyToOne
-    private Competence compId;
 
     public CompetenceProfile() {
     }
@@ -88,29 +79,12 @@ public class CompetenceProfile implements Serializable {
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    @XmlTransient
-    public Collection<Translate> getTranslateCollection() {
-        return translateCollection;
-    }
-
-    public void setTranslateCollection(Collection<Translate> translateCollection) {
-        this.translateCollection = translateCollection;
-    }
-
     public Person getUsername() {
         return username;
     }
 
     public void setUsername(Person username) {
         this.username = username;
-    }
-
-    public Competence getCompId() {
-        return compId;
-    }
-
-    public void setCompId(Competence compId) {
-        this.compId = compId;
     }
 
     @Override

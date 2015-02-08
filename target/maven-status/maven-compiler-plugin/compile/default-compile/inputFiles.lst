@@ -3,10 +3,8 @@
 /home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/model/CompetenceProfile.java
 /home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/model/Role.java
 /home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/model/Competence.java
-/home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/model/Translate.java
 /home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/controller/PersonController.java
 /home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/controller/AdminController.java
 /home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/model/Person.java
-/home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/model/Language.java
 /home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/model/Availability.java
 /home/syst3m/NetBeansProjects/mavenprojectiv1201/src/main/java/controller/RejectException.java

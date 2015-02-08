@@ -6,7 +6,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,11 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -42,8 +39,6 @@ public class Competence implements Serializable {
     @Size(max = 255)
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "compId")
-    private Collection<CompetenceProfile> competenceProfileCollection;
 
     public Competence() {
     }
@@ -66,15 +61,6 @@ public class Competence implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @XmlTransient
-    public Collection<CompetenceProfile> getCompetenceProfileCollection() {
-        return competenceProfileCollection;
-    }
-
-    public void setCompetenceProfileCollection(Collection<CompetenceProfile> competenceProfileCollection) {
-        this.competenceProfileCollection = competenceProfileCollection;
     }
 
     @Override

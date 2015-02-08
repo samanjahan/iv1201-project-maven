@@ -5,10 +5,8 @@
     <class>model.Availability</class>
     <class>model.Competence</class>
     <class>model.CompetenceProfile</class>
-    <class>model.Language</class>
     <class>model.Person</class>
     <class>model.Role</class>
-    <class>model.Translate</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

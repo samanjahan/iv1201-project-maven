@@ -26,9 +26,16 @@ public class PersonController {
     private final static long ADMIN_USER = 2l;
     
     /**
-     *Method register the user to the database
+     * Creates and adds a new user to the database with the given parameters as values
+     * 
+     * @param name
+     * @param surname
+     * @param ssn
+     * @param email
+     * @param password
+     * @param username
+     * @throws RejectException 
      */
-    
     public void register(String name, String surname, String ssn, String email, String password, String username) throws RejectException{
         
         if(!usernameAvailable(username)){
@@ -41,6 +48,13 @@ public class PersonController {
         em.persist(person);
     } 
     
+    /***
+     * Encrypts a given String 
+     * 
+     * @param password
+     * @return returns the encrypted string
+     * @throws NoSuchAlgorithmException 
+     */
     private String getEncryptedPassword(String password) throws NoSuchAlgorithmException{
         MessageDigest digDigest = MessageDigest.getInstance("MD5");
         digDigest.update(password.getBytes(),0,password.length());
@@ -48,6 +62,18 @@ public class PersonController {
         return md5;
     }
     
+    
+    /**
+     * Creates a person object and sets its values to the given input parameters
+     * @param name
+     * @param surname
+     * @param ss
+     * @param email
+     * @param password
+     * @param username
+     * @return returns a person object with values matching the input parameters
+     * @throws RejectException 
+     */
     private Person populatePersonObject(String name, String surname, String ss, String email, String password, String username) throws RejectException{
         
         Person person;
@@ -71,19 +97,24 @@ public class PersonController {
         return person;
     }
     
-     /** 
-     * Checks if a username already exists 
-     * @param username
-     * @return returns true if input is not yet taken
-     */
-    
+   /***
+    * Finds a and returns a person with the given username
+    * @param username
+    * @return returns a person object with a given username
+    */
     public Person findPerson(String username){
          Person person = em.find(Person.class,username);
          return person;
     }
     
+     /** 
+     * Checks if a username already exists using the findPerson method
+     * 
+     * @param username
+     * @return returns true if input is not yet taken
+     */
     public boolean usernameAvailable(String username) {
-       Person person = em.find(Person.class,username);
+       Person person = findPerson(username);
         if(person != null){
            return false;         
         }

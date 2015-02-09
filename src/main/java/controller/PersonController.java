@@ -30,18 +30,14 @@ public class PersonController {
      */
     
     public void register(String name, String surname, String ssn, String email, String password, String username) throws RejectException{
-        Person person = em.find(Person.class,username);
-        if(person != null){
+        
+        if(!usernameAvailable(username)){
             throw  new RejectException("Username is already taken.");
         }
-        
+        Person person;
         person = populatePersonObject(name, surname, ssn, email, password, username);
-        
         Role role = em.find(Role.class, ADMIN_USER);
-      
         person.setRoleId(role);
-        
-
         em.persist(person);
     } 
     
@@ -60,8 +56,7 @@ public class PersonController {
         person.setSsn(ss);
         person.setSurname(surname);
         person.setUsername(username);
-        person.setEmail(email);
-        
+        person.setEmail(email);        
         
         try {
             person.setPassword(getEncryptedPassword(password));
@@ -76,15 +71,22 @@ public class PersonController {
         return person;
     }
     
-        /**
-     * Not yet implemented
-     * 
+     /** 
      * Checks if a username already exists 
      * @param username
      * @return returns true if input is not yet taken
      */
-    public boolean usernameAvailable(String username) {
     
+    public Person findPerson(String username){
+         Person person = em.find(Person.class,username);
+         return person;
+    }
+    
+    public boolean usernameAvailable(String username) {
+       Person person = em.find(Person.class,username);
+        if(person != null){
+           return false;         
+        }
         return true;
     }
     

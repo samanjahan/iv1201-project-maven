@@ -4,14 +4,18 @@ import controller.RejectException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Person;
+import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 
 /**
  *
  * @author Aeive
  */
+
+@RunWith(Arquillian.class)
 public class PersonControllerTest {
     
     private Person person;

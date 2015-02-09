@@ -88,8 +88,7 @@ public class RegistrationManager {
       
         if(!validate()){
             return "";
-        }
-        
+        }        
        try{
         personController.register(name, surname, ssn, email, password, username);
         MessageFactory.getInstance().addInfoMessage(message);
@@ -98,37 +97,58 @@ public class RegistrationManager {
        }
         return "";
     }
-    public boolean validate(){
-        if(!name.matches( "[a-zA-Z]*" ) || name.equals("")){
+    
+    public boolean validate(){       
+        if(!nameValidation(name)){
             String message = "Name may only contain letters.";
             MessageFactory.getInstance().addInfoMessage(message);
             return false;
-        }
-        if(!surname.matches( "[a-zA-Z]*" ) || surname.equals("")){
+        }        
+        if(!nameValidation(surname)){
             String message = "Lastname may only contain letters.";
             MessageFactory.getInstance().addInfoMessage(message);
             return false;
         }
-        if(!ssn.matches("([0-9]{6,6})[-]([0-9]{4,4})")){
+        if(!ssnValidation(ssn)){
            String message = "SSN is to be entered in the following format XXXXXXX-XXXX";
            MessageFactory.getInstance().addInfoMessage(message);
            return false;
         }
-        if(!email.matches("([a-zA-Z1-9.-_]*)[@]([a-zA-Z1-9.]*)")){
+        if(!emailValidation(email)){
           String  message = "A real Email Adress required.";
           MessageFactory.getInstance().addInfoMessage(message);
           return false;
         }
-        if(!personController.usernameAvailable(username)){
+        if(!usernameValidation(username)){
           String  message = "Username already taken";
           MessageFactory.getInstance().addInfoMessage(message);
             return false;            
         }
-        if(username.equals("")){
-          String  message = "Username required";
-          MessageFactory.getInstance().addInfoMessage(message);
-          return false;            
+        return true;
+    }
+    
+    public boolean nameValidation(String name){
+        return !(!name.matches( "[A-ZÅÄÖa-zåäö]*" ) || name.equals(""));
+    }
+    
+    public boolean ssnValidation(String ssn){
+        return ssn.matches("([0-9]{6,6})[-]([0-9]{4,4})");
+    }
+    public boolean test(String ssn){
+        return true;
+    }
+    public boolean emailValidation(String email){
+        return email.matches("([a-zA-Z1-9\\.\\-\\_]+)[@]([a-zA-Z1-9.]+)");
+    }
+    
+    public boolean usernameValidation(String username){
+        if(!personController.usernameAvailable(username)||username.equals("")){
+            return false;            
         }
+        return true;
+    }
+    
+    public boolean passwordValidation(String password){
         return true;
     }
 }

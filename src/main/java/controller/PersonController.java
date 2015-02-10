@@ -120,6 +120,10 @@ public class PersonController {
         }
         return true;
     }
+
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
     
     
     

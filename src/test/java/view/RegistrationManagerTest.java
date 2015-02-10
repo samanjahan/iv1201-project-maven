@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 
 
@@ -24,17 +25,20 @@ public class RegistrationManagerTest {
     @Before
     public void setUp(){
         mockedPC = mock(PersonController.class);
+        when(mockedPC.usernameAvailable("test")).thenReturn(true);
         rm.setPersonController(mockedPC);
     }
 
     @Test
     public void registerTest() throws RejectException{
+        rm.setTest(true);
         rm.setName("test");
         rm.setSurname("test");
         rm.setSsn("000000-0000");
         rm.setEmail("test@test.test");
         rm.setUsername("test");
         rm.setPassword("test");
+        rm.setMessage("test");
         rm.register();
         verify(mockedPC,times(1)).register("test","test","000000-0000","test@test.test","test","test");
     }
@@ -60,7 +64,7 @@ public class RegistrationManagerTest {
         Assert.assertFalse(rm.ssnValidation("19930112-1234"));
         Assert.assertFalse(rm.ssnValidation("9301121234"));
         Assert.assertFalse(rm.ssnValidation("930112_1234"));
-        Assert.assertTrue(rm.test("930112-5176"));        
+        Assert.assertTrue(rm.ssnValidation("930112-5176"));        
     }
     
     @Test

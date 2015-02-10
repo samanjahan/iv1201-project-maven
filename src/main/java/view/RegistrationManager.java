@@ -26,6 +26,7 @@ public class RegistrationManager {
     private String email;
     private String username;
     private String password;
+    private String message;
 
     
     public  Exception getException(){
@@ -79,18 +80,24 @@ public class RegistrationManager {
         this.password = password;
     }
 
+    public void setPersonController(PersonController personController){
+        this.personController = personController;
+    }
 
+    public String getMessage(){
+        return message;
+    }
     
     @EJB PersonController personController;
     
     public String register() throws RejectException{
-      String  message = "Registraion was successfull!";
       
         if(!validate()){
             return "";
         }        
        try{
         personController.register(name, surname, ssn, email, password, username);
+        message = "Registraion was successfull!";
         MessageFactory.getInstance().addInfoMessage(message);
        }catch(Exception e){
            MessageFactory.getInstance().addErrorMessage(e.getMessage());
@@ -100,27 +107,27 @@ public class RegistrationManager {
     
     public boolean validate(){       
         if(!nameValidation(name)){
-            String message = "Name may only contain letters.";
+            message = "Name may only contain letters.";
             MessageFactory.getInstance().addInfoMessage(message);
             return false;
         }        
         if(!nameValidation(surname)){
-            String message = "Lastname may only contain letters.";
+            message = "Lastname may only contain letters.";
             MessageFactory.getInstance().addInfoMessage(message);
             return false;
         }
         if(!ssnValidation(ssn)){
-           String message = "SSN is to be entered in the following format XXXXXXX-XXXX";
+           message = "SSN is to be entered in the following format XXXXXXX-XXXX";
            MessageFactory.getInstance().addInfoMessage(message);
            return false;
         }
         if(!emailValidation(email)){
-          String  message = "A real Email Adress required.";
+          message = "A real Email Adress required.";
           MessageFactory.getInstance().addInfoMessage(message);
           return false;
         }
         if(!usernameValidation(username)){
-          String  message = "Username already taken";
+          message = "Username already taken";
           MessageFactory.getInstance().addInfoMessage(message);
             return false;            
         }

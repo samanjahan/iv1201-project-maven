@@ -1,20 +1,43 @@
-import org.jboss.arquillian.junit.Arquillian;
+import controller.PersonController;
+import controller.RejectException;
 import view.RegistrationManager;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import org.mockito.runners.MockitoJUnitRunner;
 
 
 /**
  *
  * @author Aeive
  */
-@RunWith(Arquillian.class)
+@RunWith(MockitoJUnitRunner.class)
 public class RegistrationManagerTest {
         
     RegistrationManager rm = new RegistrationManager();
+    PersonController mockedPC;
     
+    @Before
+    public void setUp(){
+        mockedPC = mock(PersonController.class);
+        rm.setPersonController(mockedPC);
+    }
 
+    @Test
+    public void registerTest() throws RejectException{
+        rm.setName("test");
+        rm.setSurname("test");
+        rm.setSsn("000000-0000");
+        rm.setEmail("test@test.test");
+        rm.setUsername("test");
+        rm.setPassword("test");
+        rm.register();
+        verify(mockedPC,times(1)).register("test","test","000000-0000","test@test.test","test","test");
+    }
     @Test
     public void nameValidationTest(){
         Assert.assertFalse(rm.nameValidation(""));

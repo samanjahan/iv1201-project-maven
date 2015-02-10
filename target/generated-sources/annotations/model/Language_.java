@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import model.Translate;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-09T21:25:12")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-10T14:08:17")
 @StaticMetamodel(Language.class)
 public class Language_ { 
 

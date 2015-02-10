@@ -1,30 +1,17 @@
-
 import controller.PersonController;
 import controller.RejectException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import model.Person;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 
-@RunWith(Arquillian.class)
+
 public class PersonControllerTest {
     
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class,"test.jar")
-            .addClasses(Person.class, PersonController.class);
-    }
-    
+  
    
     private Person person;
     

@@ -26,10 +26,15 @@ public class RegistrationManager {
     private String email;
     private String username;
     private String password;
-
+    private String message;
+    private boolean testing;
     
     public  Exception getException(){
         return exception;
+    }
+    
+    public void setTest(boolean testing){
+        this.testing = testing;
     }
     public String getName() {
         return name;
@@ -79,56 +84,125 @@ public class RegistrationManager {
         this.password = password;
     }
 
-
+    public void setPersonController(PersonController personController){
+        this.personController = personController;
+    }
+    
+    public void setMessage(String message){
+        this.message = message;
+    }
+    
+    public String getMessage(){
+        return message;
+    }
     
     @EJB PersonController personController;
     
+    /**
+     * Calls the personController in order to register a new account 
+     * creates appropriate message using the MessageFactory
+     * returns an empty string in order to refresh the page
+     * 
+     * @return 
+     * @throws RejectException 
+     */
     public String register() throws RejectException{
-      String  message = "Registraion was successfull!";
       
         if(!validate()){
             return "";
-        }
-        
+        }        
        try{
         personController.register(name, surname, ssn, email, password, username);
-        MessageFactory.getInstance().addInfoMessage(message);
+        message = "Registraion was successfull!";
+        if(!testing)
+            MessageFactory.getInstance().addInfoMessage(message);
        }catch(Exception e){
-           MessageFactory.getInstance().addErrorMessage(e.getMessage());
+            MessageFactory.getInstance().addErrorMessage(e.getMessage());
        }
         return "";
     }
-    public boolean validate(){
-        if(!name.matches( "[a-zA-Z]*" ) || name.equals("")){
-            String message = "Name may only contain letters.";
+    
+    /****
+     * calls the functions nameValidation, ssnValidation, emailValidation
+     * and UsernameValidation in order to validate entered data
+     * 
+     * @return returns a boolean according to how the validation went
+     */
+    public boolean validate(){       
+        if(!nameValidation(name)){
+            message = "Name may only contain letters.";
+            MessageFactory.getInstance().addInfoMessage(message);
+            return false;
+        }        
+        if(!nameValidation(surname)){
+            message = "Lastname may only contain letters.";
             MessageFactory.getInstance().addInfoMessage(message);
             return false;
         }
-        if(!surname.matches( "[a-zA-Z]*" ) || surname.equals("")){
-            String message = "Lastname may only contain letters.";
-            MessageFactory.getInstance().addInfoMessage(message);
-            return false;
-        }
-        if(!ssn.matches("([0-9]{6,6})[-]([0-9]{4,4})")){
-           String message = "SSN is to be entered in the following format XXXXXXX-XXXX";
+        if(!ssnValidation(ssn)){
+           message = "SSN is to be entered in the following format XXXXXXX-XXXX";
            MessageFactory.getInstance().addInfoMessage(message);
            return false;
         }
-        if(!email.matches("([a-zA-Z1-9.-_]*)[@]([a-zA-Z1-9.]*)")){
-          String  message = "A real Email Adress required.";
+        if(!emailValidation(email)){
+          message = "A real Email Adress required.";
           MessageFactory.getInstance().addInfoMessage(message);
           return false;
         }
-        if(!personController.usernameAvailable(username)){
-          String  message = "Username already taken";
+        if(!usernameValidation(username)){
+          message = "Username already taken";
           MessageFactory.getInstance().addInfoMessage(message);
             return false;            
         }
-        if(username.equals("")){
-          String  message = "Username required";
-          MessageFactory.getInstance().addInfoMessage(message);
-          return false;            
-        }
+        return true;
+    }
+    
+    /****
+     * validates the entered parameter using regex
+     * 
+     * @param name
+     * @return returns a boolean depending on the result of validation
+     */
+    public boolean nameValidation(String name){
+        return !(!name.matches( "[A-ZÅÄÖa-zåäö]*" ) || name.equals(""));
+    }
+     
+    /****
+     * validates the entered parameter using regex
+     * 
+     * @param ssn
+     * @return returns a boolean depending on the result of validation
+     */
+    public boolean ssnValidation(String ssn){
+        return ssn.matches("([0-9]{6,6})[-]([0-9]{4,4})");
+    }
+     
+    /****
+     * validates the entered parameter using regex
+     * 
+     * @param email
+     * @return returns a boolean depending on the result of validation
+     */
+    public boolean emailValidation(String email){
+        return email.matches("([a-zA-Z1-9\\.\\-\\_]+)[@]([a-zA-Z1-9.]+)");
+    }
+     
+    /****
+     * validates the entered parameter username by making sure its available
+     * 
+     * @param username
+     * @return returns a boolean depending on the result of validation
+     */
+    public boolean usernameValidation(String username){
+       
+        return !(!personController.usernameAvailable(username)||username.equals(""));
+    }
+    
+     
+    /****
+     * Not yet implemented
+     */
+    public boolean passwordValidation(String password){
         return true;
     }
 }

@@ -18,14 +18,14 @@ import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 
 
-
-/*@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class PersonControllerTest {
     
   
    
     private Person person;
     EntityManager mockedEm;
+    EntityManager mockedRoleEm;
       
     @EJB
     PersonController pc = new PersonController();
@@ -34,7 +34,9 @@ public class PersonControllerTest {
     @Before
     public void setUp(){
         mockedEm = mock(EntityManager.class);
+        mockedRoleEm = mock(EntityManager.class);
         pc.setEntityManager(mockedEm);
+        pc.setRoleEntityManager(mockedRoleEm);
     }
     
     @Test
@@ -45,7 +47,7 @@ public class PersonControllerTest {
                 pc.register("Test","Test","930112-5555", "email@test.com", "password ","Test");
             }
             
-            verify(mockedEm,times(1)).find(Role.class, 1l);
+            verify(mockedRoleEm,times(1)).find(Role.class, "admin");
             verify(mockedEm,times(1)).persist(any());
         } catch (RejectException ex) {
             Logger.getLogger(PersonControllerTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,4 +67,4 @@ public class PersonControllerTest {
             Logger.getLogger(PersonControllerTest.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-}*/
+}

@@ -16,7 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
  *
  * @author Aeive
  */
-/*@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class RegistrationManagerTest {
         
     RegistrationManager rm = new RegistrationManager();
@@ -80,4 +80,4 @@ public class RegistrationManagerTest {
         Assert.assertTrue(rm.emailValidation("-._@hotmail.com"));    
     }
     
-}*/
+}

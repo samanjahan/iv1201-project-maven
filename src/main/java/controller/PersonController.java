@@ -148,7 +148,9 @@ public class PersonController {
     public void setEntityManager(EntityManager em) {
         this.em = em;
     }
-    
+    public void setRoleEntityManager(EntityManager emRole) {
+        this.emRole = emRole;
+    }
     
     /**
      * Creates a group object and persist it

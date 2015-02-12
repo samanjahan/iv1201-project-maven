@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="mavenprojectiv1201" transaction-type="JTA">
-    <jta-data-source>jdbc/projectiv1201</jta-data-source>
+    <jta-data-source>jdbc/sqliv1201</jta-data-source>
     <class>model.Availability</class>
     <class>model.Competence</class>
     <class>model.CompetenceProfile</class>
+    <class>model.Groups</class>
     <class>model.Language</class>
     <class>model.Person</class>
     <class>model.Role</class>
     <class>model.Translate</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-    
-        <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
-    
   </persistence-unit>
 </persistence>

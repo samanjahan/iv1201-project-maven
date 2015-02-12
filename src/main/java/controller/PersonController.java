@@ -11,6 +11,8 @@ import model.Person;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import model.Groups;
 import model.Role;
 
@@ -18,6 +20,7 @@ import model.Role;
  *
  * @author syst3m
  */
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class PersonController {
 
@@ -43,7 +46,7 @@ public class PersonController {
         }
         Person person;
         person = populatePersonObject(name, surname, ssn, email, password, username);
-        Role role = findRole("admin");
+        Role role = findRole("applicant");
         if (role == null) {
             throw new RejectException("Role dose not found");
         }

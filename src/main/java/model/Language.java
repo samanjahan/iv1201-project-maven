@@ -8,7 +8,6 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -39,12 +38,10 @@ public class Language implements Serializable {
     @NotNull
     @Column(name = "lang_id")
     private Long langId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 255)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "langIg")
+    @OneToMany(mappedBy = "langIg")
     private Collection<Translate> translateCollection;
 
     public Language() {
@@ -52,11 +49,6 @@ public class Language implements Serializable {
 
     public Language(Long langId) {
         this.langId = langId;
-    }
-
-    public Language(Long langId, String name) {
-        this.langId = langId;
-        this.name = name;
     }
 
     public Long getLangId() {

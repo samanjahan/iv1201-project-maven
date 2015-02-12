@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,7 +47,7 @@ public class CompetenceProfile implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "years_of_experience")
     private Double yearsOfExperience;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compId")
+    @OneToMany(mappedBy = "compId")
     private Collection<Translate> translateCollection;
     @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne

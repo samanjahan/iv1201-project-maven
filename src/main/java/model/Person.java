@@ -11,8 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -61,11 +59,10 @@ public class Person implements Serializable {
     @Size(max = 255)
     @Column(name = "surname")
     private String surname;
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
-    @ManyToOne
-    private Role roleId;
     @OneToMany(mappedBy = "username")
     private Collection<CompetenceProfile> competenceProfileCollection;
+    @OneToMany(mappedBy = "username")
+    private Collection<Groups> groupsCollection;
     @OneToMany(mappedBy = "username")
     private Collection<Availability> availabilityCollection;
 
@@ -124,14 +121,6 @@ public class Person implements Serializable {
         this.surname = surname;
     }
 
-    public Role getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Role roleId) {
-        this.roleId = roleId;
-    }
-
     @XmlTransient
     public Collection<CompetenceProfile> getCompetenceProfileCollection() {
         return competenceProfileCollection;
@@ -139,6 +128,15 @@ public class Person implements Serializable {
 
     public void setCompetenceProfileCollection(Collection<CompetenceProfile> competenceProfileCollection) {
         this.competenceProfileCollection = competenceProfileCollection;
+    }
+
+    @XmlTransient
+    public Collection<Groups> getGroupsCollection() {
+        return groupsCollection;
+    }
+
+    public void setGroupsCollection(Collection<Groups> groupsCollection) {
+        this.groupsCollection = groupsCollection;
     }
 
     @XmlTransient

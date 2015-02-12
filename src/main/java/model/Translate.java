@@ -28,45 +28,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Translate.findAll", query = "SELECT t FROM Translate t"),
-    @NamedQuery(name = "Translate.findByTranslateId", query = "SELECT t FROM Translate t WHERE t.translateId = :translateId"),
-    @NamedQuery(name = "Translate.findByName", query = "SELECT t FROM Translate t WHERE t.name = :name")})
+    @NamedQuery(name = "Translate.findByName", query = "SELECT t FROM Translate t WHERE t.name = :name"),
+    @NamedQuery(name = "Translate.findByTranslateId", query = "SELECT t FROM Translate t WHERE t.translateId = :translateId")})
 public class Translate implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "translate_id")
-    private int translateId;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 255)
     @Column(name = "name")
     private String name;
-    @JoinColumn(name = "comp_id", referencedColumnName = "competence_profile_id")
-    @ManyToOne(optional = false)
-    private CompetenceProfile compId;
+    @Column(name = "translate_id")
+    private Integer translateId;
     @JoinColumn(name = "lang_ig", referencedColumnName = "lang_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Language langIg;
+    @JoinColumn(name = "comp_id", referencedColumnName = "competence_profile_id")
+    @ManyToOne
+    private CompetenceProfile compId;
 
     public Translate() {
     }
 
     public Translate(String name) {
         this.name = name;
-    }
-
-    public Translate(String name, int translateId) {
-        this.name = name;
-        this.translateId = translateId;
-    }
-
-    public int getTranslateId() {
-        return translateId;
-    }
-
-    public void setTranslateId(int translateId) {
-        this.translateId = translateId;
     }
 
     public String getName() {
@@ -77,12 +62,12 @@ public class Translate implements Serializable {
         this.name = name;
     }
 
-    public CompetenceProfile getCompId() {
-        return compId;
+    public Integer getTranslateId() {
+        return translateId;
     }
 
-    public void setCompId(CompetenceProfile compId) {
-        this.compId = compId;
+    public void setTranslateId(Integer translateId) {
+        this.translateId = translateId;
     }
 
     public Language getLangIg() {
@@ -91,6 +76,14 @@ public class Translate implements Serializable {
 
     public void setLangIg(Language langIg) {
         this.langIg = langIg;
+    }
+
+    public CompetenceProfile getCompId() {
+        return compId;
+    }
+
+    public void setCompId(CompetenceProfile compId) {
+        this.compId = compId;
     }
 
     @Override

@@ -10,13 +10,12 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -30,57 +29,46 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
-    @NamedQuery(name = "Role.findByRoleId", query = "SELECT r FROM Role r WHERE r.roleId = :roleId"),
-    @NamedQuery(name = "Role.findByName", query = "SELECT r FROM Role r WHERE r.name = :name")})
+    @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")})
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "role_id")
-    private Long roleId;
-    @Size(max = 255)
-    @Column(name = "name")
-    private String name;
-    @OneToMany(mappedBy = "roleId")
-    private Collection<Person> personCollection;
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "roleName")
+    private String roleName;
+    @OneToMany(mappedBy = "groupname")
+    private Collection<Groups> groupsCollection;
 
     public Role() {
     }
 
-    public Role(Long roleId) {
-        this.roleId = roleId;
+    public Role(String roleName) {
+        this.roleName = roleName;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @XmlTransient
-    public Collection<Person> getPersonCollection() {
-        return personCollection;
+    public Collection<Groups> getGroupsCollection() {
+        return groupsCollection;
     }
 
-    public void setPersonCollection(Collection<Person> personCollection) {
-        this.personCollection = personCollection;
+    public void setGroupsCollection(Collection<Groups> groupsCollection) {
+        this.groupsCollection = groupsCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roleId != null ? roleId.hashCode() : 0);
+        hash += (roleName != null ? roleName.hashCode() : 0);
         return hash;
     }
 
@@ -91,7 +79,7 @@ public class Role implements Serializable {
             return false;
         }
         Role other = (Role) object;
-        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
+        if ((this.roleName == null && other.roleName != null) || (this.roleName != null && !this.roleName.equals(other.roleName))) {
             return false;
         }
         return true;
@@ -99,7 +87,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Role[ roleId=" + roleId + " ]";
+        return "model.Role[ roleName=" + roleName + " ]";
     }
     
 }

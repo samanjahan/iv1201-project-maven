@@ -10,7 +10,7 @@
         <h:panelGroup id="exceptions">
             <h:panelGroup rendered="#{not empty facesContext.messageList}">
                 <ui:repeat var="message" value="#{facesContext.messageList}">
-                    <div class="alert alert-dismissable #{(message.severity eq 'ERROR') ? 'alert-danger' : 'alert alert-success'}">
+                    <div class="alert alert-dismissable #{(message.severity eq 'ERROR') ? 'alert alert-danger' : 'alert alert-success'}">
                         <button type="button" class="close" 
                                 data-dismiss="alert" 
                                 aria-hidden="true">x</button>

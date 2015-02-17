@@ -36,7 +36,7 @@ public class PersonControllerTest {
         mockedEm = mock(EntityManager.class);
         mockedRoleEm = mock(EntityManager.class);
         pc.setEntityManager(mockedEm);
-        pc.setRoleEntityManager(mockedRoleEm);
+      //  pc.setRoleEntityManager(mockedRoleEm);
     }
     
     @Test

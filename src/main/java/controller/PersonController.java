@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import model.Person;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -24,6 +25,8 @@ import model.Role;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class PersonController {
+    @EJB
+    private RegisterDAO registerDAO;
 
     @PersistenceContext(unitName = "mavenprojectiv1201")
     private EntityManager em, emGroups, emRole;
@@ -45,8 +48,7 @@ public class PersonController {
         if (!usernameAvailable(username)) {
             throw new RejectException("Username is already taken.");
         }else{
-            RegisterDAO registerDao =new RegisterDAO();
-            registerDao.register(name, surname, ssn, email, password, username);
+            registerDAO.register(name, surname, ssn, email, password, username);
         }
     }
 

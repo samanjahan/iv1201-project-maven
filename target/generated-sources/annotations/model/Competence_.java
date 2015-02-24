@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import model.CompetenceProfile;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-12T16:00:56")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-23T19:15:00")
 @StaticMetamodel(Competence.class)
 public class Competence_ { 
 

@@ -11,14 +11,17 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.*;
 
 /**
  *
@@ -38,10 +41,14 @@ public class Role implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "roleName")
     private String roleName;
-    @OneToMany(mappedBy = "groupname")
-    private Collection<Groups> groupsCollection;
+    @JoinTable(name = "groups", joinColumns = {
+        @JoinColumn(name = "groupname", referencedColumnName = "roleName")}, inverseJoinColumns = {
+        @JoinColumn(name = "username", referencedColumnName = "username")})
+    @ManyToMany
+    private Collection<Person> personCollection;
 
     public Role() {
+        personCollection = new ArrayList<Person>();
     }
 
     public Role(String roleName) {
@@ -55,14 +62,19 @@ public class Role implements Serializable {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-
-    @XmlTransient
-    public Collection<Groups> getGroupsCollection() {
-        return groupsCollection;
+    
+    public  void addPerson(Person person){
+        personCollection.add(person);
+        
     }
 
-    public void setGroupsCollection(Collection<Groups> groupsCollection) {
-        this.groupsCollection = groupsCollection;
+    @XmlTransient
+    public Collection<Person> getPersonCollection() {
+        return personCollection;
+    }
+
+    public void setPersonCollection(Collection<Person> personCollection) {
+        this.personCollection = personCollection;
     }
 
     @Override

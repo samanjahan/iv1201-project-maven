@@ -9,13 +9,12 @@ import controller.RejectException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.Groups;
 import model.Person;
 import model.Role;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 /**
  *
@@ -25,7 +24,7 @@ import model.Role;
 @Stateless
 public class RegisterDAO {
     @PersistenceContext(unitName = "mavenprojectiv1201")
-    private EntityManager em,emGroups, emRole;
+    private EntityManager em;
     
         
        /**
@@ -42,17 +41,22 @@ public class RegisterDAO {
      */
     public void register(String name, String surname, String ssn, String email, String password, String username) throws RejectException {
 
+        
         if (!usernameAvailable(username)) {
             throw new RejectException("Username is already taken.");
         }
-        Person person;
-        person = populatePersonObject(name, surname, ssn, email, password, username);
         Role role = findRole("applicant");
         if (role == null) {
             throw new RejectException("Role dose not found");
         }
+        Person person;
+        person = populatePersonObject(name, surname, ssn, email, password, username);
+    
+   
         em.persist(person);
-        createGroup(username, role);
+        
+        role.addPerson(person);
+        
     }
     
         /**
@@ -90,14 +94,15 @@ public class RegisterDAO {
      * @throws RejectException
      */
     private Person populatePersonObject(String name, String surname, String ss, String email, String password, String username) throws RejectException {
+      
 
-        Person person;
-        person = new Person();
+        Person person = new Person();
         person.setName(name);
         person.setSsn(ss);
         person.setSurname(surname);
         person.setUsername(username);
         person.setEmail(email);
+        
 
         try {
             person.setPassword(getEncryptedPassword(password));
@@ -129,7 +134,7 @@ public class RegisterDAO {
      * @return returns a String object with a given role
      */
     public Role findRole(String userRole) {
-        Role role = emRole.find(Role.class, userRole);
+        Role role = em.find(Role.class, userRole);
         return role;
 
     }
@@ -150,22 +155,6 @@ public class RegisterDAO {
 
     public void setEntityManager(EntityManager em) {
         this.em = em;
-    }
-    public void setRoleEntityManager(EntityManager emRole) {
-        this.emRole = emRole;
-    }
-        /**
-     * Creates a group object and persist it
-     *
-     * @param username
-     * @param role
-     */
-    private void createGroup(String username, Role role) {
-        Groups groups = new Groups();
-        Person person = findPerson(username);
-        groups.setGroupname(role);
-        groups.setUsername(person);
-        emGroups.persist(groups);
     }
     
 }

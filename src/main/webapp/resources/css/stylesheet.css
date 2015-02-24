@@ -9,3 +9,15 @@
     background-color: #e7e7e7;
 }
 
+.push-down {
+    margin-top: 120px;
+}
+.pull-down{
+    margin-bottom: 5px;
+}
+.btn-size {
+    padding: 7px 70px;
+    font-size: 14px;
+    line-height: normal;
+    }
+

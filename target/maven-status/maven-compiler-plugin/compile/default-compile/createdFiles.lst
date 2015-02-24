@@ -1,5 +1,4 @@
 controller/PersonController.class
-model/Groups_.class
 view/RegistrationManager.class
 model/Person.class
 model/Availability.class
@@ -7,13 +6,14 @@ model/Language_.class
 model/CompetenceProfile.class
 model/Translate_.class
 model/CompetenceProfile_.class
-model/Groups.class
 model/Role_.class
 model/Person_.class
+view/LogOut.class
 model/Translate.class
 model/Availability_.class
 view/MessageFactory.class
 controller/RejectException.class
+integration/RegisterDAO.class
 model/Language.class
 model/Competence_.class
 model/Role.class

@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Login Form</title>
-    </h:head>
-    <h:body style="background-color: yellow;">
-        <h3>Welcome to the Login Page</h3>
-        <p><h:link outcome="/index" value="To Home Page" /></p>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      template="/templates/layout.xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <ui:define name="content">
+        <div class="col-lg-12">
+            <h3>Welcome to the Login Page</h3>
+        </div>
+        
 
         <!--
             The significant thing to understand about this form is that it
@@ -27,16 +29,27 @@
             cause a JSF page to not display correctly. See the web.xml which
             has an entry that allows this.
         -->
-        <form method="POST" action="j_security_check">
-            <h:panelGrid columns="2">
-                <h:outputLabel value="User Name"/>
-                <input type="text" name="j_username" />
-                <h:outputLabel value="Password"/>
-                <input type="password" name="j_password" />
-                <input type="submit" value="Login" />
-            </h:panelGrid>
-        </form> 
-
-    </h:body>
-</html>
+        
+        <div class="col-lg-4">
+            <form method="POST" action="j_security_check" >
+        
+           
+                <div class="form-group">
+                <h:outputLabel value="User Name" class="control-label"/>
+                <input type="text" name="j_username" class="form-control login-form-control"/>
+                </div>
+                 <div class="form-group">
+                <h:outputLabel value="Password" class="control-label"/>
+                <input type="password" name="j_password" class="form-control login-form-control" />
+                 </div>
+                <div class="form-group">
+                <input type="submit" value="Login" class="btn bg-primary"/>
+                </div>
+        
+                </form>
+       
+        </div>
+             
+    </ui:define>
+</ui:composition>
 

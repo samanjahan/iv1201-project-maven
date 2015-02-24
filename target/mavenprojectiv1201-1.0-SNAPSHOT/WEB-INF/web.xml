@@ -43,15 +43,11 @@
             <description/>
             <role-name>admin</role-name>
         </auth-constraint>
-        <user-data-constraint>
-            <description>ssl enabled</description>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
     </security-constraint>
     <security-constraint>
         <display-name>UserConstraint</display-name>
         <web-resource-collection>
-            <web-resource-name>user</web-resource-name>
+            <web-resource-name>users</web-resource-name>
             <description/>
             <url-pattern>/faces/users/*</url-pattern>
             <http-method>GET</http-method>
@@ -60,12 +56,8 @@
         <auth-constraint>
             <description/>
             <role-name>admin</role-name>
-            <role-name>user</role-name>
+            <role-name>users</role-name>
         </auth-constraint>
-        <user-data-constraint>
-            <description>ssl enabled</description>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
@@ -81,7 +73,7 @@
     </security-role>
     <security-role>
         <description/>
-        <role-name>user</role-name>
+        <role-name>users</role-name>
     </security-role>
     <!--
     <resource-ref>

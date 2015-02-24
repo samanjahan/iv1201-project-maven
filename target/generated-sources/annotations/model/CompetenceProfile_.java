@@ -9,15 +9,15 @@ import model.Competence;
 import model.Person;
 import model.Translate;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-22T19:06:46")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-23T19:15:00")
 @StaticMetamodel(CompetenceProfile.class)
 public class CompetenceProfile_ { 
 
-    public static volatile CollectionAttribute<CompetenceProfile, Translate> translateCollection;
-    public static volatile SingularAttribute<CompetenceProfile, BigInteger> competenceId;
-    public static volatile SingularAttribute<CompetenceProfile, Double> yearsOfExperience;
     public static volatile SingularAttribute<CompetenceProfile, Competence> compId;
-    public static volatile SingularAttribute<CompetenceProfile, Long> competenceProfileId;
     public static volatile SingularAttribute<CompetenceProfile, Person> username;
+    public static volatile SingularAttribute<CompetenceProfile, Long> competenceProfileId;
+    public static volatile SingularAttribute<CompetenceProfile, BigInteger> competenceId;
+    public static volatile CollectionAttribute<CompetenceProfile, Translate> translateCollection;
+    public static volatile SingularAttribute<CompetenceProfile, Double> yearsOfExperience;
 
 }

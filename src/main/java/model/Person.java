@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -59,10 +60,10 @@ public class Person implements Serializable {
     @Size(max = 255)
     @Column(name = "surname")
     private String surname;
+    @ManyToMany(mappedBy = "personCollection")
+    private Collection<Role> roleCollection;
     @OneToMany(mappedBy = "username")
     private Collection<CompetenceProfile> competenceProfileCollection;
-    @OneToMany(mappedBy = "username")
-    private Collection<Groups> groupsCollection;
     @OneToMany(mappedBy = "username")
     private Collection<Availability> availabilityCollection;
 
@@ -122,21 +123,21 @@ public class Person implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Role> getRoleCollection() {
+        return roleCollection;
+    }
+
+    public void setRoleCollection(Collection<Role> roleCollection) {
+        this.roleCollection = roleCollection;
+    }
+
+    @XmlTransient
     public Collection<CompetenceProfile> getCompetenceProfileCollection() {
         return competenceProfileCollection;
     }
 
     public void setCompetenceProfileCollection(Collection<CompetenceProfile> competenceProfileCollection) {
         this.competenceProfileCollection = competenceProfileCollection;
-    }
-
-    @XmlTransient
-    public Collection<Groups> getGroupsCollection() {
-        return groupsCollection;
-    }
-
-    public void setGroupsCollection(Collection<Groups> groupsCollection) {
-        this.groupsCollection = groupsCollection;
     }
 
     @XmlTransient

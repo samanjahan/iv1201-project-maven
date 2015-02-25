@@ -6,8 +6,6 @@
 package model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +29,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "CompetenceProfile.findAll", query = "SELECT c FROM CompetenceProfile c"),
     @NamedQuery(name = "CompetenceProfile.findByCompetenceProfileId", query = "SELECT c FROM CompetenceProfile c WHERE c.competenceProfileId = :competenceProfileId"),
-    @NamedQuery(name = "CompetenceProfile.findByCompetenceId", query = "SELECT c FROM CompetenceProfile c WHERE c.competenceId = :competenceId"),
     @NamedQuery(name = "CompetenceProfile.findByYearsOfExperience", query = "SELECT c FROM CompetenceProfile c WHERE c.yearsOfExperience = :yearsOfExperience")})
 public class CompetenceProfile implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -42,19 +37,18 @@ public class CompetenceProfile implements Serializable {
     @Basic(optional = false)
     @Column(name = "competence_profile_id")
     private Long competenceProfileId;
-    @Column(name = "competence_id")
-    private BigInteger competenceId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "years_of_experience")
     private Double yearsOfExperience;
-    @OneToMany(mappedBy = "compId")
-    private Collection<Translate> translateCollection;
-    @JoinColumn(name = "username", referencedColumnName = "username")
+    @JoinColumn(name = "user_name", referencedColumnName = "username")
     @ManyToOne
-    private Person username;
-    @JoinColumn(name = "comp_id", referencedColumnName = "competence_id")
+    private Person userName;
+    @JoinColumn(name = "competence_name", referencedColumnName = "name")
     @ManyToOne
-    private Competence compId;
+    private Competence competenceName;
+    @JoinColumn(name = "translate_name", referencedColumnName = "name")
+    @ManyToOne
+    private Translate translateName;
 
     public CompetenceProfile() {
     }
@@ -71,14 +65,6 @@ public class CompetenceProfile implements Serializable {
         this.competenceProfileId = competenceProfileId;
     }
 
-    public BigInteger getCompetenceId() {
-        return competenceId;
-    }
-
-    public void setCompetenceId(BigInteger competenceId) {
-        this.competenceId = competenceId;
-    }
-
     public Double getYearsOfExperience() {
         return yearsOfExperience;
     }
@@ -87,29 +73,28 @@ public class CompetenceProfile implements Serializable {
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    @XmlTransient
-    public Collection<Translate> getTranslateCollection() {
-        return translateCollection;
+    public Person getUserName() {
+        return userName;
     }
 
-    public void setTranslateCollection(Collection<Translate> translateCollection) {
-        this.translateCollection = translateCollection;
+    public void setUserName(Person userName) {
+        this.userName = userName;
     }
 
-    public Person getUsername() {
-        return username;
+    public Competence getCompetenceName() {
+        return competenceName;
     }
 
-    public void setUsername(Person username) {
-        this.username = username;
+    public void setCompetenceName(Competence competenceName) {
+        this.competenceName = competenceName;
     }
 
-    public Competence getCompId() {
-        return compId;
+    public Translate getTranslateName() {
+        return translateName;
     }
 
-    public void setCompId(Competence compId) {
-        this.compId = compId;
+    public void setTranslateName(Translate translateName) {
+        this.translateName = translateName;
     }
 
     @Override

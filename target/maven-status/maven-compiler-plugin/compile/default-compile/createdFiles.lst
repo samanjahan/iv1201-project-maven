@@ -4,10 +4,12 @@ model/Person.class
 model/Availability.class
 model/Language_.class
 model/CompetenceProfile.class
+view/AdminManager.class
 model/Translate_.class
 model/CompetenceProfile_.class
 model/Role_.class
 model/Person_.class
+integration/CompetenceDAO.class
 view/LogOut.class
 model/Translate.class
 model/Availability_.class

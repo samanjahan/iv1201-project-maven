@@ -25,10 +25,11 @@ DROP TABLE IF EXISTS `Language`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Language` (
-  `lang_id` bigint(20) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`lang_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `name` varchar(255) NOT NULL,
+  `lang_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`name`),
+  UNIQUE KEY `lang_id_UNIQUE` (`lang_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +38,7 @@ CREATE TABLE `Language` (
 
 LOCK TABLES `Language` WRITE;
 /*!40000 ALTER TABLE `Language` DISABLE KEYS */;
+INSERT INTO `Language` VALUES ('sw',1);
 /*!40000 ALTER TABLE `Language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,15 +51,16 @@ DROP TABLE IF EXISTS `Translate`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Translate` (
   `name` varchar(255) NOT NULL,
-  `translate_id` int(11) DEFAULT NULL,
-  `comp_id` bigint(20) DEFAULT NULL,
-  `lang_ig` bigint(20) DEFAULT NULL,
+  `translate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `competence_name` varchar(255) DEFAULT NULL,
+  `lang_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`name`),
-  KEY `FK_Translate_lang_ig` (`lang_ig`),
-  KEY `FK_Translate_comp_id` (`comp_id`),
-  CONSTRAINT `FK_Translate_comp_id` FOREIGN KEY (`comp_id`) REFERENCES `competence_profile` (`competence_profile_id`),
-  CONSTRAINT `FK_Translate_lang_ig` FOREIGN KEY (`lang_ig`) REFERENCES `Language` (`lang_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `translate_id_UNIQUE` (`translate_id`),
+  KEY `FK_Translate_competence_name` (`competence_name`),
+  KEY `FK_Translate_lang_name` (`lang_name`),
+  CONSTRAINT `FK_Translate_competence_name` FOREIGN KEY (`competence_name`) REFERENCES `competence` (`name`),
+  CONSTRAINT `FK_Translate_lang_name` FOREIGN KEY (`lang_name`) REFERENCES `Language` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +69,7 @@ CREATE TABLE `Translate` (
 
 LOCK TABLES `Translate` WRITE;
 /*!40000 ALTER TABLE `Translate` DISABLE KEYS */;
+INSERT INTO `Translate` VALUES ('bil',12,'car','sw');
 /*!40000 ALTER TABLE `Translate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,10 +108,11 @@ DROP TABLE IF EXISTS `competence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `competence` (
+  `name` varchar(255) NOT NULL,
   `competence_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`competence_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`name`),
+  UNIQUE KEY `competence_id_UNIQUE` (`competence_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,6 +121,7 @@ CREATE TABLE `competence` (
 
 LOCK TABLES `competence` WRITE;
 /*!40000 ALTER TABLE `competence` DISABLE KEYS */;
+INSERT INTO `competence` VALUES ('car',12);
 /*!40000 ALTER TABLE `competence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,15 +134,17 @@ DROP TABLE IF EXISTS `competence_profile`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `competence_profile` (
   `competence_profile_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `competence_id` bigint(20) DEFAULT NULL,
   `years_of_experience` double DEFAULT NULL,
-  `comp_id` bigint(20) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `competence_name` varchar(255) DEFAULT NULL,
+  `translate_name` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`competence_profile_id`),
-  KEY `FK_competence_profile_username` (`username`),
-  KEY `FK_competence_profile_comp_id` (`comp_id`),
-  CONSTRAINT `FK_competence_profile_comp_id` FOREIGN KEY (`comp_id`) REFERENCES `competence` (`competence_id`),
-  CONSTRAINT `FK_competence_profile_username` FOREIGN KEY (`username`) REFERENCES `person` (`username`)
+  KEY `FK_competence_profile_user_name` (`user_name`),
+  KEY `FK_competence_profile_competence_name` (`competence_name`),
+  KEY `FK_competence_profile_translate_name` (`translate_name`),
+  CONSTRAINT `FK_competence_profile_translate_name` FOREIGN KEY (`translate_name`) REFERENCES `Translate` (`name`),
+  CONSTRAINT `FK_competence_profile_competence_name` FOREIGN KEY (`competence_name`) REFERENCES `competence` (`name`),
+  CONSTRAINT `FK_competence_profile_user_name` FOREIGN KEY (`user_name`) REFERENCES `person` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,10 +165,10 @@ DROP TABLE IF EXISTS `groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `groups` (
-  `groupname` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  PRIMARY KEY (`groupname`,`username`),
-  KEY `FK_groups_username` (`username`),
+  `groupname` varchar(255) NOT NULL,
+  PRIMARY KEY (`username`,`groupname`),
+  KEY `FK_groups_groupname` (`groupname`),
   CONSTRAINT `FK_groups_groupname` FOREIGN KEY (`groupname`) REFERENCES `role` (`roleName`),
   CONSTRAINT `FK_groups_username` FOREIGN KEY (`username`) REFERENCES `person` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -172,7 +180,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES ('applicant','ashkan'),('admin','saman');
+INSERT INTO `groups` VALUES ('saman','admin');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +208,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES ('ashkan','samanj@kth.se','saman','15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225','860908-1537','Jahan'),('saman','samanj@kth.se','saman','15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225','860908-1537','Jahan');
+INSERT INTO `person` VALUES ('saman','samanj@kth.se','saman','15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225','860908-1511','Jahan');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-24 11:21:06
+-- Dump completed on 2015-02-25 15:05:17

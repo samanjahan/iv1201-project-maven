@@ -62,7 +62,7 @@ public class Person implements Serializable {
     private String surname;
     @ManyToMany(mappedBy = "personCollection")
     private Collection<Role> roleCollection;
-    @OneToMany(mappedBy = "username")
+    @OneToMany(mappedBy = "userName")
     private Collection<CompetenceProfile> competenceProfileCollection;
     @OneToMany(mappedBy = "username")
     private Collection<Availability> availabilityCollection;

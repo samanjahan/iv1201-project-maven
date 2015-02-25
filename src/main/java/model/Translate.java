@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,20 +41,28 @@ public class Translate implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "name")
     private String name;
+    @Basic(optional = false)
     @Column(name = "translate_id")
-    private Integer translateId;
-    @JoinColumn(name = "lang_ig", referencedColumnName = "lang_id")
+    private int translateId;
+    @JoinColumn(name = "lang_name", referencedColumnName = "name")
     @ManyToOne
-    private Language langIg;
-    @JoinColumn(name = "comp_id", referencedColumnName = "competence_profile_id")
+    private Language langName;
+    @JoinColumn(name = "competence_name", referencedColumnName = "name")
     @ManyToOne
-    private CompetenceProfile compId;
+    private Competence competenceName;
+    @OneToMany(mappedBy = "translateName")
+    private Collection<CompetenceProfile> competenceProfileCollection;
 
     public Translate() {
     }
 
     public Translate(String name) {
         this.name = name;
+    }
+
+    public Translate(String name, int translateId) {
+        this.name = name;
+        this.translateId = translateId;
     }
 
     public String getName() {
@@ -62,28 +73,37 @@ public class Translate implements Serializable {
         this.name = name;
     }
 
-    public Integer getTranslateId() {
+    public int getTranslateId() {
         return translateId;
     }
 
-    public void setTranslateId(Integer translateId) {
+    public void setTranslateId(int translateId) {
         this.translateId = translateId;
     }
 
-    public Language getLangIg() {
-        return langIg;
+    public Language getLangName() {
+        return langName;
     }
 
-    public void setLangIg(Language langIg) {
-        this.langIg = langIg;
+    public void setLangName(Language langName) {
+        this.langName = langName;
     }
 
-    public CompetenceProfile getCompId() {
-        return compId;
+    public Competence getCompetenceName() {
+        return competenceName;
     }
 
-    public void setCompId(CompetenceProfile compId) {
-        this.compId = compId;
+    public void setCompetenceName(Competence competenceName) {
+        this.competenceName = competenceName;
+    }
+
+    @XmlTransient
+    public Collection<CompetenceProfile> getCompetenceProfileCollection() {
+        return competenceProfileCollection;
+    }
+
+    public void setCompetenceProfileCollection(Collection<CompetenceProfile> competenceProfileCollection) {
+        this.competenceProfileCollection = competenceProfileCollection;
     }
 
     @Override

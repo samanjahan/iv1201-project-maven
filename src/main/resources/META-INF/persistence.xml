@@ -2,13 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="mavenprojectiv1201" transaction-type="JTA">
     <jta-data-source>jdbc/iv1201realm</jta-data-source>
-    <class>model.Availability</class>
-    <class>model.Competence</class>
-    <class>model.CompetenceProfile</class>
-    <class>model.Language</class>
-    <class>model.Person</class>
-    <class>model.Role</class>
-    <class>model.Translate</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <validation-mode>NONE</validation-mode>
     <properties>

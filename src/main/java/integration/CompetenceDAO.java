@@ -86,5 +86,10 @@ public class CompetenceDAO {
         return translate;
     }
     
+    public Competence findCompetence(String competenceName){
+        Competence competence = em.find(Competence.class, competenceName);
+        return competence;
+    }
+    
     
 }

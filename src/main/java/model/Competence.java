@@ -44,7 +44,7 @@ public class Competence implements Serializable {
     private long competenceId;
     @OneToMany(mappedBy = "competenceName")
     private Collection<Translate> translateCollection;
-    @OneToMany(mappedBy = "competenceName")
+    @OneToMany(mappedBy = "competenceId")
     private Collection<CompetenceProfile> competenceProfileCollection;
 
     public Competence() {

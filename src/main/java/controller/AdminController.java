@@ -38,4 +38,7 @@ public class AdminController {
     public void deleteCompetence(Competence competence) throws RejectException{        
         competenceDAO.deleteCompetence(competence);
     }
+    public void setCompetenceDAO(CompetenceDAO competenceDAO){
+        this.competenceDAO = competenceDAO;
+    }
 }

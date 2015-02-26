@@ -5,9 +5,13 @@
  */
 package controller;
 
+import integration.CompetenceProfileDAO;
 import integration.RegisterDAO;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import model.Competence;
+import java.util.*;
+import model.CompetenceProfile;
 
 
 /**
@@ -18,6 +22,9 @@ import javax.ejb.Stateful;
 public class PersonController {    
     @EJB 
     RegisterDAO registerDAO;
+    
+    @EJB
+    CompetenceProfileDAO CompetenceProfileDAO;
     
         
        /**
@@ -39,6 +46,14 @@ public class PersonController {
     
     public  boolean usernameAvailable(String username){
         return registerDAO.usernameAvailable(username);
+    }
+    
+    public void createCompetenceProfile(String userName ,List<Competence> selectedcompetence , Date from , Date to){
+        CompetenceProfileDAO.createCompetenceProfile(userName, selectedcompetence,from,to);
+    }
+    
+    public void setRegisterDAO(RegisterDAO registerDAO){
+        this.registerDAO = registerDAO;
     }
     
     

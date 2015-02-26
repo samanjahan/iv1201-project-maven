@@ -25,6 +25,7 @@ import javax.ejb.TransactionAttributeType;
 public class RegisterDAO {
     @PersistenceContext(unitName = "mavenprojectiv1201")
     private EntityManager em;
+    private boolean test = false;
     
         
        /**
@@ -46,7 +47,8 @@ public class RegisterDAO {
             throw new RejectException("Username is already taken.");
         }
         Role role = findRole("applicant");
-        if (role == null) {
+        
+        if (role == null && !test) {
             throw new RejectException("Role dose not found");
         }
         Person person;
@@ -155,6 +157,10 @@ public class RegisterDAO {
 
     public void setEntityManager(EntityManager em) {
         this.em = em;
+    }
+    
+    public void setTest(boolean test){
+        this.test = test;
     }
     
 }

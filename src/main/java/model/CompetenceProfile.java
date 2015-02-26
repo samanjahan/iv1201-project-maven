@@ -43,12 +43,9 @@ public class CompetenceProfile implements Serializable {
     @JoinColumn(name = "user_name", referencedColumnName = "username")
     @ManyToOne
     private Person userName;
-    @JoinColumn(name = "competence_name", referencedColumnName = "name")
+    @JoinColumn(name = "competence_id", referencedColumnName = "name")
     @ManyToOne
-    private Competence competenceName;
-    @JoinColumn(name = "translate_name", referencedColumnName = "name")
-    @ManyToOne
-    private Translate translateName;
+    private Competence competenceId;
 
     public CompetenceProfile() {
     }
@@ -81,20 +78,12 @@ public class CompetenceProfile implements Serializable {
         this.userName = userName;
     }
 
-    public Competence getCompetenceName() {
-        return competenceName;
+    public Competence getCompetenceId() {
+        return competenceId;
     }
 
-    public void setCompetenceName(Competence competenceName) {
-        this.competenceName = competenceName;
-    }
-
-    public Translate getTranslateName() {
-        return translateName;
-    }
-
-    public void setTranslateName(Translate translateName) {
-        this.translateName = translateName;
+    public void setCompetenceId(Competence competenceId) {
+        this.competenceId = competenceId;
     }
 
     @Override

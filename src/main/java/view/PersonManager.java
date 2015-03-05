@@ -31,17 +31,33 @@ public class PersonManager {
       private List<Competence> competenceList;
       private List<Comparable> selectedItems;
       private Map<String, Boolean> checked = new HashMap<String, Boolean>();
-      private List<String> strings;
+      private List<String> experienceList = new ArrayList<String>();
       private Date from;
       private Date to;
       private String username;
+      private String experience;
 
-    public List<String> getStrings() {
-        return strings;
+    public String getExperience() {
+        return experience;
     }
 
-    public void setStrings(List<String> strings) {
-        this.strings = strings;
+    public void setExperience(String experience) {
+        if(experience.isEmpty()){
+            this.experienceList.add("0");
+        }else{
+            this.experienceList.add(experience);
+        }
+        
+        
+    }
+
+    public List<String> getExperienceList() {
+        return experienceList;
+    }
+
+    public void setExperienceList(String experience) {
+        System.out.println("SetStrings " + experience);
+    //    this.strings.add(strings);
     }
       
 
@@ -106,9 +122,7 @@ public class PersonManager {
         competenceList = adminController.getAllAcompetence();
     }
     
-    public String submit() throws RejectException{
-      //  System.out.println("strings " + strings.size());
-        
+    public String submit() throws RejectException{        
         List<Competence> checkedItems = new ArrayList<Competence>();
         for(Competence comp : competenceList){
             if(checked.get(comp.getName())){
@@ -121,7 +135,7 @@ public class PersonManager {
             return "";
         }
         try {
-            personController.createCompetenceProfile(username,checkedItems,from,to);
+            personController.createCompetenceProfile(username,checkedItems,from,to,experienceList);
         } catch (Exception e) {
             MessageFactory.getInstance().addErrorMessage(e.getMessage());
         }

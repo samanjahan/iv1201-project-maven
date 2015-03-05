@@ -16,6 +16,7 @@ import model.Language;
 import model.Translate;
 import java.util.List;
 import model.Competence;
+import model.CompetenceProfile;
 
 
 /**
@@ -65,6 +66,7 @@ public class CompetenceDAO {
     public void deleteCompetence(Competence competence) throws RejectException{
         String competenceName = competence.getName();
         Translate translate = findTranslate(competenceName);
+        deleteCompetenceProfile(competence);
         if(translate == null){
             throw new RejectException("Competence not found");
         }
@@ -89,6 +91,16 @@ public class CompetenceDAO {
     public Competence findCompetence(String competenceName){
         Competence competence = em.find(Competence.class, competenceName);
         return competence;
+    }
+    
+    public void deleteCompetenceProfile(Competence competence){
+        TypedQuery<CompetenceProfile> comProfileQueryList = em.createNamedQuery("CompetenceProfile.findAll",CompetenceProfile.class);
+        List<CompetenceProfile> listOfCompetenceProfile = comProfileQueryList.getResultList();
+        for(int i = 0 ; i < listOfCompetenceProfile.size(); ++i){
+            if(listOfCompetenceProfile.get(i).getCompetenceId().getName().equals(competence.getName())){
+                em.remove(listOfCompetenceProfile.get(i));
+            }
+        }
     }
     
     

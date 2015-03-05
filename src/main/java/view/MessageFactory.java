@@ -36,7 +36,7 @@ public class MessageFactory {
     */
     public void addErrorMessage(String message){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-            FacesMessage.SEVERITY_ERROR,null,message));
+            FacesMessage.SEVERITY_ERROR, null, message));
     }
     
     /**
@@ -48,7 +48,6 @@ public class MessageFactory {
     */
     public void addInfoMessage(String message){
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-            FacesMessage.SEVERITY_INFO,null,message));
+            FacesMessage.SEVERITY_INFO, null, message));
     }
-    
 }

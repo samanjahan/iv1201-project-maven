@@ -1,1 +1,5 @@
+PersonControllerTest.class
+RegisterDAOTest.class
 RegistrationManagerTest.class
+controller/AdminControllerTest.class
+CompetenceDAOTest.class

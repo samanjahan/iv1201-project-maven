@@ -9,13 +9,13 @@
         
         <!--Exception-->
         <h:panelGroup id="exceptions">
-            <h:panelGroup rendered="#{not empty facesContext.messageList}">
+            <h:panelGroup rendered="#{not empty facesContext.messages}">
                 <ui:repeat var="message" value="#{facesContext.messageList}">
-                    <div class="alert alert-dismissable #{(message.severity eq 'ERROR') ? 'alert alert-danger' : 'alert alert-success'}">
+                    <div class="alert alert-dismissable #{(message.severity eq 'ERROR 2') ? 'alert-danger' : 'alert alert-success'}">
                         <button type="button" class="close" 
                                 data-dismiss="alert" 
                                 aria-hidden="true">x</button>
-                        <strong><h:outputText rendered="#{message.severity eq 'ERROR'}" value="Sorry!"></h:outputText></strong>
+                        <strong><h:outputText rendered="#{message.severity eq 'ERROR 2'}" value="Sorry!" /></strong>
                         <h:outputText value="#{message.detail}"></h:outputText>
                     </div>
                 </ui:repeat>

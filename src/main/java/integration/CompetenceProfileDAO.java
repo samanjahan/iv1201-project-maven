@@ -29,6 +29,8 @@ public class CompetenceProfileDAO{
     @PersistenceContext(unitName = "mavenprojectiv1201")
     private EntityManager em;
     
+    private double yearsOfExperience;
+    
     @Inject
     RegisterDAO registerDAO;
     
@@ -40,18 +42,23 @@ public class CompetenceProfileDAO{
         return competence;
     }
     
-    public void createCompetenceProfile(String userName ,List<Competence> selectedcompetence , Date from , Date to){
-        System.out.println("profile " + selectedcompetence.size());
+    public void createCompetenceProfile(String userName ,List<Competence> selectedcompetence , Date from , Date to,List<String> experienceList){
+        
         Person person = registerDAO.findPerson(userName);
-        System.out.println("persoon " + person.getEmail());
+        
         List<Competence> listofCompetence = getAllCompetence(selectedcompetence);
         createAvilability(from,to,person);
         
          for(int i = 0 ; i < listofCompetence.size(); ++i){
+             CompetenceProfile competenceProfile = new CompetenceProfile();     
+             yearsOfExperience = Double.valueOf(experienceList.get(i));           
+             competenceProfile.setUserName(person);
+             competenceProfile.setCompetenceId(listofCompetence.get(i));
+             competenceProfile.setYearsOfExperience(yearsOfExperience);
+             em.persist(competenceProfile);
            
         }
          
-        System.out.println("competence " + listofCompetence.size());
     }
     
     public List<Competence> getAllCompetence(List<Competence> list){

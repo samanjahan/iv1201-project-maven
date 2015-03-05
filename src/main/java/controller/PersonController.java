@@ -48,8 +48,8 @@ public class PersonController {
         return registerDAO.usernameAvailable(username);
     }
     
-    public void createCompetenceProfile(String userName ,List<Competence> selectedcompetence , Date from , Date to){
-        CompetenceProfileDAO.createCompetenceProfile(userName, selectedcompetence,from,to);
+    public void createCompetenceProfile(String userName ,List<Competence> selectedcompetence , Date from , Date to, List<String> experienceList){
+        CompetenceProfileDAO.createCompetenceProfile(userName, selectedcompetence,from,to,experienceList);
     }
     
     public void setRegisterDAO(RegisterDAO registerDAO){

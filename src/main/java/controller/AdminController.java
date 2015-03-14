@@ -6,6 +6,7 @@
 package controller;
 
 import integration.CompetenceDAO;
+import integration.RegisterDAO;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import model.Competence;
@@ -19,6 +20,9 @@ import java.util.List;
 public class AdminController {
     @EJB
     CompetenceDAO competenceDAO;
+    
+    @EJB 
+    RegisterDAO registerDAO;
     
     public void createCompetence(String competenceName,String translateCompetenceName) throws RejectException{
         competenceDAO.createCompetence(competenceName,translateCompetenceName);

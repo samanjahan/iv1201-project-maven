@@ -11,7 +11,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import model.Competence;
 import java.util.*;
-import model.CompetenceProfile;
 
 
 /**

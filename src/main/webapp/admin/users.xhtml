@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      template="/admin/layout.xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h:form> 
+                        <div class="col-lg-4">
+                            <p>testttt</p>
+                            <h:outputLabel value="#{userHandle.competenceProfileList}"/>
+                            
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

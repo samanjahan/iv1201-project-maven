@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import model.Competence;
 import model.Person;
 import java.util.ArrayList;
+import javax.persistence.TypedQuery;
 import model.Availability;
 import model.CompetenceProfile;
 
@@ -57,8 +58,7 @@ public class CompetenceProfileDAO{
              competenceProfile.setYearsOfExperience(yearsOfExperience);
              em.persist(competenceProfile);
            
-        }
-         
+        }        
     }
     
     public List<Competence> getAllCompetence(List<Competence> list){
@@ -78,8 +78,9 @@ public class CompetenceProfileDAO{
         em.persist(avibilityla);
     }
     
-    private  void createCompetencePrifle(){
-        
+    public List<CompetenceProfile> getAllCompetenceProfile(){
+         TypedQuery<CompetenceProfile> competenceProquesrList = em.createNamedQuery("CompetenceProfile.findAll",CompetenceProfile.class);
+        List<CompetenceProfile> compProList = competenceProquesrList.getResultList();
+        return compProList;
     }
-    
 }

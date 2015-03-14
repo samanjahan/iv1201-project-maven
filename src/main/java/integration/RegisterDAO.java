@@ -15,6 +15,8 @@ import model.Person;
 import model.Role;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  *
@@ -161,6 +163,12 @@ public class RegisterDAO {
     
     public void setTest(boolean test){
         this.test = test;
+    }
+    
+    public List<Person> getAllUser(){
+        TypedQuery<Person> personequesrList = em.createNamedQuery("Person.findAll",Person.class);
+        List<Person> personList = personequesrList.getResultList();
+        return personList;
     }
     
 }

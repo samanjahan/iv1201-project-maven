@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package model;
 
 import java.io.Serializable;
@@ -23,8 +24,10 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author syst3m
+ * the Availability class is an entity class 
+ * representing the availability of a registered user
+ * 
+ * @author Group 20
  */
 @Entity
 @Table(name = "availability")
@@ -51,45 +54,80 @@ public class Availability implements Serializable {
     @ManyToOne
     private Person username;
 
+    /**
+     * empty constructor 
+     */
     public Availability() {
     }
 
+    /**
+     * 
+     * @param availabilityId  
+     */
     public Availability(Long availabilityId) {
         this.availabilityId = availabilityId;
     }
 
+    /**
+     * @return the availability id of the object
+     */
     public Long getAvailabilityId() {
         return availabilityId;
     }
 
+    /**
+     * @param availabilityId unique id of the object
+     */
     public void setAvailabilityId(Long availabilityId) {
         this.availabilityId = availabilityId;
     }
 
+    /**
+     * @return the beginning date of the availability period
+     */
     public Date getFromDate() {
         return fromDate;
     }
 
+    /**
+     * @param fromDate the beginning date of the availability period
+     */
     public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
 
+    /**
+     * @return the ending date of the availability period
+     */
     public Date getToDate() {
         return toDate;
     }
 
+    /**
+     * @param toDate ending date of the availability period
+     */
     public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
 
+    /**
+     * @return the person the availability object belongs to
+     */
     public Person getUsername() {
         return username;
     }
 
+    /**
+     * @param username the username of the person the object belongs to
+     */
     public void setUsername(Person username) {
         this.username = username;
     }
 
+    /**
+     * 
+     * @return the hashcode of the object
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -97,6 +135,13 @@ public class Availability implements Serializable {
         return hash;
     }
 
+    /**
+     * Compares this object to the parameter to 
+     * see if they are equal.
+     * 
+     * @param object
+     * @return 
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -110,6 +155,10 @@ public class Availability implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return a string containing this objects ID
+     */
     @Override
     public String toString() {
         return "model.Availability[ availabilityId=" + availabilityId + " ]";

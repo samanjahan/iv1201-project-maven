@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package model;
 
 import java.io.Serializable;
@@ -20,8 +21,10 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author syst3m
+ * The CompetenceProfile class is an entity class 
+ * representing a CompetenceProfile.
+ * 
+ * @author Group 20
  */
 @Entity
 @Table(name = "competence_profile")
@@ -47,45 +50,88 @@ public class CompetenceProfile implements Serializable {
     @ManyToOne
     private Competence competenceId;
 
+    /**
+     * Empty constructor
+     */
     public CompetenceProfile() {
     }
 
+    /**
+     * 
+     * @param competenceProfileId unigue Id of the competenceProfile
+     */
     public CompetenceProfile(Long competenceProfileId) {
         this.competenceProfileId = competenceProfileId;
     }
 
+    /**
+     * 
+     * @return unique ID of the competenceProfile
+     */
     public Long getCompetenceProfileId() {
         return competenceProfileId;
     }
 
+    /**
+     * 
+     * @param competenceProfileId unique ID of the competenceProfile
+     */
     public void setCompetenceProfileId(Long competenceProfileId) {
         this.competenceProfileId = competenceProfileId;
     }
 
+    /**
+     * 
+     * @return int describing the years of experience of user
+     */
     public Double getYearsOfExperience() {
         return yearsOfExperience;
     }
 
+    /**
+     * 
+     * @param yearsOfExperience int describing the years of experience of user
+     */
     public void setYearsOfExperience(Double yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
     }
 
+    /**
+     * 
+     * @return username of the owner of the competence profile
+     */
     public Person getUserName() {
         return userName;
     }
 
+    /**
+     * 
+     * @param userName of the owner of the competence profile
+     */
     public void setUserName(Person userName) {
         this.userName = userName;
     }
 
+    /**
+     * 
+     * @return unique id of the referenced competence
+     */
     public Competence getCompetenceId() {
         return competenceId;
     }
 
+    /**
+     * 
+     * @param competenceId unique id of the referenced competence
+     */
     public void setCompetenceId(Competence competenceId) {
         this.competenceId = competenceId;
     }
 
+    /**
+     * 
+     * @return hashcode of object
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -93,6 +139,13 @@ public class CompetenceProfile implements Serializable {
         return hash;
     }
 
+    /**
+     * compares this object to the parameter
+     * to see if they are equal
+     * 
+     * @param object
+     * @return boolean depending of the result of comparison
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -105,7 +158,10 @@ public class CompetenceProfile implements Serializable {
         }
         return true;
     }
-
+    /**
+     * 
+     * @return string containing Id of object
+     */
     @Override
     public String toString() {
         return "model.CompetenceProfile[ competenceProfileId=" + competenceProfileId + " ]";

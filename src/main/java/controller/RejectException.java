@@ -1,18 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package controller;
 
 /**
+ * RejectException is an exception class for rejecting a request.
  *
- * @author syst3m
- */
-/**
- * <code>RejectException</code> is an exception class for rejecting a request.
- *
- *
+ * @author Group 20
  */
 @SuppressWarnings("serial")
 public class RejectException extends Exception {
@@ -44,7 +41,7 @@ public class RejectException extends Exception {
     /**
      * Constructs an exception with a message and cause.
      *     
-* @param message - The error message.
+     * @param message - The error message.
      * @param cause - The cause of the error
      */
     public RejectException(String message, Throwable cause) {

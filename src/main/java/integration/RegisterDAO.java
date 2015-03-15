@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package integration;
 
 import controller.RejectException;
@@ -19,8 +20,12 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- *
- * @author syst3m
+ * The registerDAO class handles all database
+ * transactions concerning the registration of 
+ * a new user by using the entity manager.
+ * 
+ * @author Group 20
+ * 
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
@@ -30,9 +35,9 @@ public class RegisterDAO {
     private boolean test = false;
     
         
-       /**
-     * Creates and adds a new user to the database with the given parameters as
-     * values
+     /**
+     * Creates and adds a new user to the database with 
+     * the given parameters as values
      *
      * @param name
      * @param surname
@@ -63,8 +68,8 @@ public class RegisterDAO {
         
     }
     
-        /**
-     * *
+     /**
+     * 
      * Encrypts a given String
      *
      * @param password
@@ -157,14 +162,28 @@ public class RegisterDAO {
         return true;
     }
 
+    /**
+     * 
+     * @param em Entity manager object
+     */
     public void setEntityManager(EntityManager em) {
         this.em = em;
     }
     
+    /**
+     * 
+     * @param test boolean deciding whether to run in test mode or not
+     */
     public void setTest(boolean test){
         this.test = test;
     }
     
+    /**
+     * returns a list of all the already existing
+     * users in the database.
+     *         
+     * @return list of all existing users
+     */
     public List<Person> getAllUser(){
         TypedQuery<Person> personequesrList = em.createNamedQuery("Person.findAll",Person.class);
         List<Person> personList = personequesrList.getResultList();

@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package view;
 
 
@@ -14,8 +15,7 @@ import javax.ejb.EJB;
 import java.util.List;
 
 /**
- *
- * @author syst3m
+ * the HandleUserManager class 
  */
 @RequestScoped
 

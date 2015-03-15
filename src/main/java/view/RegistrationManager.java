@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package view;
 
 import controller.PersonController;
@@ -12,8 +13,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 /**
- *
- * @author syst3m
+ * The RegistrationManager class is a view class
+ * handling the registration of a new user at the view level.
  */
 @RequestScoped
 
@@ -29,69 +30,138 @@ public class RegistrationManager {
     private String message;
     private boolean testing;
     
+    /**
+     *
+     * @return exception
+     */
     public  Exception getException(){
         return exception;
     }
     
+    /**
+     * determines whether to run class in test mode or not
+     * @param testing 
+     */
     public void setTest(boolean testing){
         this.testing = testing;
     }
+
+    /**
+     * 
+     * @return name of person
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name name of person
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return surname of person
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     *
+     * @param surname surname of person
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    /**
+     *
+     * @return ssn of person
+     */
     public String getSsn() {
         return ssn;
     }
 
+    /**
+     *
+     * @param ssn ssn of person
+     */
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }
 
+    /**
+     *
+     * @return email address of person
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email email address of person
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return username of person
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @param username username of person
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @return password of person
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password password of person
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @param personController controller handling the person entities
+     */
     public void setPersonController(PersonController personController){
         this.personController = personController;
     }
     
+    /**
+     *
+     * @param message notification message shown to the user 
+     */
     public void setMessage(String message){
         this.message = message;
     }
     
+    /**
+     *
+     * @return notification message shown to the user 
+     */
     public String getMessage(){
         return message;
     }
@@ -201,6 +271,8 @@ public class RegistrationManager {
      
     /****
      * Not yet implemented
+     * @param password
+     * @return 
      */
     public boolean passwordValidation(String password){
         return true;

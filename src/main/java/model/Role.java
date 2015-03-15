@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package model;
 
 import java.io.Serializable;
@@ -23,9 +24,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.*;
 
+
 /**
- *
- * @author syst3m
+ * The role class is an entity class 
+ * representing a role
+ * 
+ * @author Group 20
  */
 @Entity
 @Table(name = "role")
@@ -47,43 +51,83 @@ public class Role implements Serializable {
     @ManyToMany
     private Collection<Person> personCollection;
 
+    /**
+     * Constructor
+     */
     public Role() {
         personCollection = new ArrayList<Person>();
     }
 
+    /**
+     *
+     * @param roleName name of role
+     */
     public Role(String roleName) {
         this.roleName = roleName;
     }
 
+    /**
+     *
+     * @return name of role
+     */
     public String getRoleName() {
         return roleName;
     }
 
+    /**
+     *
+     * @param roleName name of role
+     */
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
     
+    /**
+     * adds the person from the input parameter
+     * to the collection of persons
+     * 
+     * @param person 
+     */
     public  void addPerson(Person person){
         personCollection.add(person);
         
     }
 
+    /**
+     *
+     * @return list of persons
+     */
     @XmlTransient
     public Collection<Person> getPersonCollection() {
         return personCollection;
     }
 
+    /**
+     *
+     * @param personCollection list of persons
+     */
     public void setPersonCollection(Collection<Person> personCollection) {
         this.personCollection = personCollection;
     }
 
+    /**
+     * 
+     * @return hashcode of object
+     */
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (roleName != null ? roleName.hashCode() : 0);
         return hash;
     }
-
+    
+    /**
+     * compares this object to the parameter
+     * to see if they are equal
+     * 
+     * @param object
+     * @return boolean depending of the result of comparison
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -96,7 +140,11 @@ public class Role implements Serializable {
         }
         return true;
     }
-
+    
+    /**
+     * 
+     * @return string containing rolename of object
+     */
     @Override
     public String toString() {
         return "model.Role[ roleName=" + roleName + " ]";

@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package view;
 
 import controller.PersonController;
@@ -19,8 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author syst3m
+ * The LogOut class implements a log out functionality
+ * in to the system
+ * 
+ * @author Group 20
  */
 @RequestScoped
 
@@ -32,6 +35,9 @@ public class LogOut extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
   
+  /**
+   * logs the user out by invalidation the current session
+   */
   public void doGet() {
     FacesContext.getCurrentInstance().getExternalContext().invalidateSession();    
   }

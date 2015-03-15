@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package model;
 
 import java.io.Serializable;
@@ -20,8 +21,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author syst3m
+ * The translate class is an entity class 
+ * representing a translation of a competence
+ * 
+ * @author Group 20
  */
 @Entity
 @Table(name = "Translate")
@@ -48,50 +51,98 @@ public class Translate implements Serializable {
     @ManyToOne
     private Competence competenceName;
 
+    /**
+     * empty constructor
+     */
     public Translate() {
     }
 
+    /**
+     *
+     * @param name translation of competence
+     */
     public Translate(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @param name translation of competence
+     * @param translateId id of competence
+     */
     public Translate(String name, int translateId) {
         this.name = name;
         this.translateId = translateId;
     }
 
+    /**
+     *
+     * @return name translation of competence
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name translation of competence
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return unique id of translation
+     */
     public int getTranslateId() {
         return translateId;
     }
 
+    /**
+     *
+     * @param translateId unique id of translation
+     */
     public void setTranslateId(int translateId) {
         this.translateId = translateId;
     }
 
+    /**
+     *
+     * @return the name of the translation language
+     */
     public Language getLangName() {
         return langName;
     }
 
+    /**
+     *
+     * @param langName the name of the translation language
+     */
     public void setLangName(Language langName) {
         this.langName = langName;
     }
 
+    /**
+     *
+     * @return name of competence in original language
+     */
     public Competence getCompetenceName() {
         return competenceName;
     }
 
+    /**
+     *
+     * @param competenceName name of competence in original language
+     */
     public void setCompetenceName(Competence competenceName) {
         this.competenceName = competenceName;
     }
-
+    
+    /**
+     * 
+     * @return hashcode of object
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -99,6 +150,13 @@ public class Translate implements Serializable {
         return hash;
     }
 
+    /**
+     * compares this object to the parameter
+     * to see if they are equal
+     * 
+     * @param object
+     * @return boolean depending of the result of comparison
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -112,6 +170,10 @@ public class Translate implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return string containing name of object
+     */
     @Override
     public String toString() {
         return "model.Translate[ name=" + name + " ]";

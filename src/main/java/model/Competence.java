@@ -1,8 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* This system was built as the project work
+* for the IV1201 course of spring 2015 at KTH
+* By group 20.
+*
+*/
 package model;
 
 import java.io.Serializable;
@@ -21,8 +22,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author syst3m
+ * The Competence class is an entity class 
+ * representing a Competence option.
+ * 
+ * @author Group 20
  */
 @Entity
 @Table(name = "competence")
@@ -47,52 +50,100 @@ public class Competence implements Serializable {
     @OneToMany(mappedBy = "competenceId")
     private Collection<CompetenceProfile> competenceProfileCollection;
 
+    /**
+     * Empty constructor
+     */
     public Competence() {
     }
 
+    /**
+     * 
+     * @param name of the competence.
+     */
     public Competence(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     * @param name of the competence
+     * @param competenceId unique id of the competence
+     */
     public Competence(String name, long competenceId) {
         this.name = name;
         this.competenceId = competenceId;
     }
 
+    /**
+     * 
+     * @return name of the competence object
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * 
+     * @param name of the competence object
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     * @return the ID of the competence object
+     */
     public long getCompetenceId() {
         return competenceId;
     }
 
+    /**
+     * 
+     * @param competenceId the ID of the competence object
+     */
     public void setCompetenceId(long competenceId) {
         this.competenceId = competenceId;
     }
 
+    /**
+     * 
+     * @return list of translations
+     */
     @XmlTransient
     public Collection<Translate> getTranslateCollection() {
         return translateCollection;
     }
 
+    /**
+     * 
+     * @param translateCollection list of translations
+     */
     public void setTranslateCollection(Collection<Translate> translateCollection) {
         this.translateCollection = translateCollection;
     }
 
+    /**
+     * 
+     * @return list of competenceProfiles
+     */
     @XmlTransient
     public Collection<CompetenceProfile> getCompetenceProfileCollection() {
         return competenceProfileCollection;
     }
 
+    /**
+     * 
+     * @param competenceProfileCollection list of competenceProfiles
+     */
     public void setCompetenceProfileCollection(Collection<CompetenceProfile> competenceProfileCollection) {
         this.competenceProfileCollection = competenceProfileCollection;
     }
 
+    /**
+     * 
+     * @return hashcode of the object
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -100,6 +151,13 @@ public class Competence implements Serializable {
         return hash;
     }
 
+    /**
+     * compares this object to the parameter
+     * to see if they are equal
+     * 
+     * @param object
+     * @return boolean depending of the result of comparison
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -113,6 +171,10 @@ public class Competence implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return string containing name of object
+     */
     @Override
     public String toString() {
         return "model.Competence[ name=" + name + " ]";

@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import model.CompetenceProfile;
 import model.Translate;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-04T18:18:49")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-16T11:31:07")
 @StaticMetamodel(Competence.class)
 public class Competence_ { 
 

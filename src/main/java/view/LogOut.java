@@ -31,9 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "logoutServlet", urlPatterns = {"/logout"})
 public class LogOut extends HttpServlet {
     
- 
-
-  private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
   
   /**
    * logs the user out by invalidation the current session

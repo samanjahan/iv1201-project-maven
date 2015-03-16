@@ -13,8 +13,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import model.CompetenceProfile;
 import model.Person;
+import java.util.ArrayList;
 
 /**
  * UserHandlerDAO handles
@@ -33,20 +36,26 @@ public class UserHandleDAO {
     @Inject
     CompetenceProfileDAO competenceProfileDAO;
     
-    public void findAllUsers(){
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Map<String, List<String>> findAllUsers(){
        List<Person> personList =  registerDAO.getAllUser();
        List<CompetenceProfile> competenceProfile = competenceProfileDAO.getAllCompetenceProfile();
-       
-       for(int  i = 0 ; i < competenceProfile.size(); ++i){
-           for(int j = 0 ; j < personList.size(); ++j){
-               if(competenceProfile.get(i).getUserName().equals(personList.get(j).getUsername())){
-                   System.out.println("testtt");
+       Map<String, List<String>> alternateMap = new HashMap<>();
+       List<String> compList;
+       for(int  i = 0 ; i < personList.size(); ++i){
+           compList = new ArrayList<String>();
+           String username = personList.get(i).getUsername();
+           for(int j = 0 ; j < competenceProfile.size(); ++j){
+               if(username.toLowerCase().equals(competenceProfile.get(j).getUserName().getName().toLowerCase())){
+                   compList.add(competenceProfile.get(j).getCompetenceId().getName());
                }
            }
-           
+           if(!compList.isEmpty()){
+               alternateMap.put(username, compList);
+           }
        }
-           
-       }
+       return alternateMap;
+    }
 
     public EntityManager getEm() {
         return em;
@@ -71,6 +80,6 @@ public class UserHandleDAO {
     public void setCompetenceProfileDAO(CompetenceProfileDAO competenceProfileDAO) {
         this.competenceProfileDAO = competenceProfileDAO;
     }
-    }
+}
     
 

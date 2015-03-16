@@ -8,6 +8,9 @@ package controller;
 
 
 import integration.UserHandleDAO;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -20,9 +23,10 @@ public class UserHandleController {
     @EJB 
     UserHandleDAO userhandleDAO;
     
-    public String test(){
-        userhandleDAO.findAllUsers();
-        return "ok";
+    public Map<String, List<String>> findAllUsersCompetenceprofile(){
+        Map<String, List<String>> alternateMap = new HashMap<>();
+        alternateMap = userhandleDAO.findAllUsers();
+        return alternateMap;
     }
     
 }

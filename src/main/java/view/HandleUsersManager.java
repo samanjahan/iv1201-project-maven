@@ -30,7 +30,8 @@ import model.Availability;
 import model.Person;
 
 /**
- * the HandleUserManager class 
+ * the HandleUserManager class handles actions taken
+ * on the userlist page of the admin section
  */
 @RequestScoped
 
@@ -44,47 +45,76 @@ public class HandleUsersManager {
     private Map<String, List<String>> alternateMap = new HashMap<>();
     private String username;
     private List<String> compList;
-    private String test = "test";
-
+    /**
+     * 
+     * @return username of user
+     */
     public String getUsername() {
         return username;
     }
-    
-   public String getTest() {
-        return test;
-    }
-   public void setTest(String test) {
-        this.test = test;
-    }
 
+    /**
+     * 
+     * @param username  of user
+     */
     public void setUsername(String username) {
         this.username = username;
     }
-
+    /**
+     * 
+     * @return list of competences
+     */
     public List<String> getCompList() {
         return compList;
     }
 
+    /**
+     * 
+     * @param compList list of competences
+     */
     public void setCompList(List<String> compList) {
         this.compList = compList;
     }
 
+    /**
+     * 
+     * @return hashmap of users and their competences
+     */
     public Map<String, List<String>> getAlternateMap() {
         return alternateMap;
     }
 
+    /**
+     * 
+     * @param alternateMap hashmap of users and their competences
+     */
     public void setAlternateMap(Map<String, List<String>> alternateMap) {
         this.alternateMap = alternateMap;
     }
 
+    /**
+     * 
+     * @return the userhandle contorller
+     */
     public UserHandleController getUserHandleController() {
         return userHandleController;
     }
 
+    /**
+     * 
+     * @param userHandleController the userhandle contorller
+     */
     public void setUserHandleController(UserHandleController userHandleController) {
         this.userHandleController = userHandleController;
     }
     
+    /**
+     * generates and links to a pdf version of an application
+     * 
+     * @param name username of applicant
+     * @throws DocumentException
+     * @throws IOException 
+     */
     public void pdfGen(String name)throws DocumentException, IOException{
         
         Person user = registerDAO.findPerson(name);
@@ -109,6 +139,9 @@ public class HandleUsersManager {
         FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/"+name+".pdf");
     }
     
+    /**
+     * creates a hashmap with the layout of username->competences
+     */
     @PostConstruct
     public void showAllCompetence(){
       alternateMap =  userHandleController.findAllUsersCompetenceprofile();
